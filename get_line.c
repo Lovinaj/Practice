@@ -15,7 +15,7 @@ char *getLine(void)
 	if (flag == -1)
 	{
 		free(buffer);
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 		/* Check for EOF (Ctrl+D) */
 		/*
 		if (feof(stdin))

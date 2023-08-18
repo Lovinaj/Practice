@@ -7,12 +7,11 @@
  * Return: void
 */
 
-void create_process(char **arrayStr, char **argv, char *env[])
+void create_process(char *command, char **arrayStr, char **argv, char *env[])
 {
 	pid_t child_pid;
 	int status;
 
-	
 	child_pid = fork();
 	if (child_pid < 0)
 	{
@@ -21,7 +20,7 @@ void create_process(char **arrayStr, char **argv, char *env[])
 	}
 	if (child_pid == 0)
 	{
-	if (execve(arrayStr[0], arrayStr, env) == -1)
+	if (execve(command, arrayStr, env) == -1)
 		perror(argv[0]);
 	}
 	else
@@ -34,13 +33,12 @@ void create_process(char **arrayStr, char **argv, char *env[])
 
 void accessCommand(char **arrayStr, char **argv, char *env[])
 {
+	char *command = _strcat("/bin/", arrayStr[0]);
 
 	if (access(arrayStr[0], F_OK) == 0)
-	{
-		create_process(arrayStr, argv, env);
-	}
+		create_process(arrayStr[0], arrayStr, argv, env);
+	else if (access(command, F_OK) == 0)
+		create_process(command, arrayStr, argv, env);
 	else
-	{
 		perror(argv[0]);
-	}
 }

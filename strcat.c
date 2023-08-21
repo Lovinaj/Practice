@@ -1,8 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "shell.h"
 
+/**
+ *  _strcat - Concatenates two strings.
+ * @str1: The destination string.
+ * @str2: The source string to be appended.
+ * Return: A pointer to the concatenated string @str1
+ */
 char *_strcat(char *str1, char *str2)
 {
 	size_t len1 = _strlen(str1);

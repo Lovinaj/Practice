@@ -1,6 +1,7 @@
 #include "shell.h"
 /**
  * create_process - system execution with fork
+ * @command: The command to be executed
  * @arrayStr: Array of strings gotten from the command line
  * @argv: Argument vector
  * @env: Environment variable from parent
@@ -31,6 +32,13 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
 	}
 }
 
+/**
+ * accessCommand - Accesses and executes a command.
+ * @arrayStr: An array of strings representing the command and its arguments.
+ * @argv: An array of strings containing command-line arguments.
+ * @env: An array of strings containing environment variables.
+ * Return: None.
+ */
 void accessCommand(char **arrayStr, char **argv, char *env[])
 {
 	char *command = _strcat("/bin/", arrayStr[0]);
@@ -41,4 +49,5 @@ void accessCommand(char **arrayStr, char **argv, char *env[])
 		create_process(command, arrayStr, argv, env);
 	else
 		perror(argv[0]);
+
 }

@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * read_line - prompt user and reads the input from stream
+ * getLine - prompt user and reads the input from stdin
  *
- * Return: return line red from input stream
+ * Return: return line red from input stdin
  */
 char *getLine(void)
 {
@@ -14,19 +14,20 @@ char *getLine(void)
 	flag = getline(&buffer, &n, stdin);
 	if (flag == -1)
 	{
-		free(buffer);
-		exit(EXIT_SUCCESS);
-		/* Check for EOF (Ctrl+D) */
-		/*
 		if (feof(stdin))
 		{
-			printf("\n");
+			free(buffer);
+			exit(EXIT_SUCCESS);
 		}
-		*/
+		else
+		{
+		free(buffer);
+		exit(EXIT_FAILURE);
+		}
 	}
 	/* check for new line character from input */
 	line = malloc(sizeof(char) * n);
-	/* note that strtok can also be used here */
+
 	while (buffer[i] != '\n')
 	{
 		line[i] = buffer[i];

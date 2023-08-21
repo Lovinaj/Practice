@@ -1,9 +1,7 @@
 #include "shell.h"
 
-#include "shell.h"
-
 /**
- * main - Entry point
+ * prompt - Displays a prompt and processes user input
  *
  * @argc: the argument counter
  * @argv: pointer to the commad line arguments entered
@@ -17,7 +15,6 @@ int prompt(int argc, char *argv[], char **env)
 	char *line;
 	char **receivedArgs;
 
-	
 	receivedArgs = malloc(sizeof(char) * 1024);
 
 	/* loop through to always display the dollar($) prompt */

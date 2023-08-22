@@ -14,16 +14,8 @@ char *getLine(void)
 	flag = getline(&buffer, &n, stdin);
 	if (flag == -1)
 	{
-		if (feof(stdin))
-		{
-			free(buffer);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
 		free(buffer);
-		exit(EXIT_FAILURE);
-		}
+		exit(EXIT_SUCCESS);
 	}
 	/* check for new line character from input */
 	line = malloc(sizeof(char) * n);

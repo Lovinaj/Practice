@@ -52,6 +52,12 @@ void accessCommand(char **arrayStr, char **argv, char *env[])
 	else if (access(command, F_OK) == 0)
 		create_process(command, arrayStr, argv, env);
 	else
-		perror(argv[0]);
+	{
+		write(2, argv[0], _strlen(argv[0]));
+		write(2, ": ", 2);
+		write(2, "1: ", 3);
+		write(2, arrayStr[0], _strlen(arrayStr[0]));
+		write(2, ": not found\n", 12);
+	}
 
 }

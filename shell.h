@@ -7,6 +7,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <sys/types.h>
+#include <signal.h>
 
 #define MAX_INPUT_LENGTH 1024
 #define BUFFSIZE_STD 128

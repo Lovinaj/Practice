@@ -15,7 +15,8 @@ int prompt(int argc, char *argv[], char **env)
 	char *line;
 	char **receivedArgs;
 
-	receivedArgs = malloc(sizeof(char) * 1024);
+	/* line = malloc(sizeof(char) * 1024); */
+	/* receivedArgs = malloc(sizeof(char) * 1024); */
 
 	/* loop through to always display the dollar($) prompt */
 	while (argc)

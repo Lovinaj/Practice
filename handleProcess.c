@@ -21,8 +21,12 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
 	}
 	if (child_pid == 0)
 	{
-	if (execve(command, arrayStr, env) == -1)
-		perror(argv[0]);
+		if (execve(command, arrayStr, env) == -1)
+		{
+			free(command);
+			free(arrayStr);
+			perror(argv[0]);
+		}
 	}
 	else
 	{

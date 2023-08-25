@@ -20,16 +20,13 @@ char **parse(char *line)
 		perror("Memory allocation for list of tokens");
 		exit(EXIT_FAILURE);
 	}
-	/* Tokenize the input line using the specified delimiter */
 	token = strtok(line, DELIM);
-
 	if (token == NULL)
 	{
 		free(token);
 		free(arrayStr);
 		return (NULL);
 	}
-	/* Loop to tokenize the entire input line */
 	for (i = 0; token != NULL; i++)
 	{
 		if (i >= buffsize)
@@ -45,12 +42,9 @@ char **parse(char *line)
 				exit(EXIT_FAILURE);
 			}
 		}
-		/* Store the token in the array only if it's not NULL */
 		arrayStr[i] = token;
-		/* Get the next token */
 		token = strtok(NULL, " ");
 	}
-	/* Null-terminate the array of char pointers */
 	arrayStr[i] = NULL;
 	free(token);
 	return (arrayStr);

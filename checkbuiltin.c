@@ -13,7 +13,7 @@ int is_builtin_command(char *command)
 
 	for (i = 0; i < sizeof(builtins) / sizeof(builtins[0]); i++)
 	{
-		if (strcmp(command, builtins[i]) == 0)
+		if (_strcmp(command, builtins[i]) == 0)
 		{
 			return (1);
 		}
@@ -33,7 +33,7 @@ void execute_builtin_command(char *command, char **args, char *env[])
 {
 	int i;
 
-	if (strcmp(command, "cd") == 0)
+	if (_strcmp(command, "cd") == 0)
 	{
 		if (args[1] != NULL)
 		{
@@ -42,13 +42,13 @@ void execute_builtin_command(char *command, char **args, char *env[])
 				perror("cd");
 			}
 		}
-	} else if (strcmp(command, "env") == 0)
+	} else if (_strcmp(command, "env") == 0)
 	{
 		for (i = 0; env[i] != NULL; i++)
 		{
 			printf("%s\n", env[i]);
 		}
-	} else if (strcmp(command, "exit") == 0)
+	} else if (_strcmp(command, "exit") == 0)
 	{
 		free(args);
 		free(command);

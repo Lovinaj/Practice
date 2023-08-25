@@ -14,11 +14,6 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
 	int status;
 
 	child_pid = fork();
-	if (child_pid < 0)
-	{
-		perror(argv[0]);
-		return;
-	}
 	if (child_pid == 0)
 	{
 		if (execve(command, arrayStr, env) == -1)
@@ -45,19 +40,15 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
  */
 void accessCommand(char **arrayStr, char **argv, char *env[])
 {
-	char *command = _strcat("/bin/", arrayStr[0]);
+	char *command;
 
 	if (is_builtin_command(arrayStr[0]))
-	{
-		free(command);
 		execute_builtin_command(arrayStr[0], arrayStr, env);
-	}
+
 	else if (access(arrayStr[0], F_OK) == 0)
-	{
-		free(command);
 		create_process(arrayStr[0], arrayStr, argv, env);
-	}
-	else if (access(command, F_OK) == 0)
+
+	else if (access(command = _strcat("/bin/", arrayStr[0]), F_OK) == 0)
 		create_process(command, arrayStr, argv, env);
 	else
 	{
@@ -66,7 +57,6 @@ void accessCommand(char **arrayStr, char **argv, char *env[])
 		write(2, "1: ", 3);
 		write(2, arrayStr[0], _strlen(arrayStr[0]));
 		write(2, ": not found\n", 12);
-		free(command);
 	}
-
+	free(command);
 }

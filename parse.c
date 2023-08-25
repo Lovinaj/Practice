@@ -18,14 +18,17 @@ char **parse(char *line)
 	if (arrayStr == NULL)
 	{
 		perror("Memory allocation for list of tokens");
-		free(arrayStr);
 		exit(EXIT_FAILURE);
 	}
 	/* Tokenize the input line using the specified delimiter */
 	token = strtok(line, DELIM);
 
 	if (token == NULL)
+	{
+		free(token);
+		free(arrayStr);
 		return (NULL);
+	}
 	/* Loop to tokenize the entire input line */
 	for (i = 0; token != NULL; i++)
 	{
@@ -38,6 +41,7 @@ char **parse(char *line)
 			{
 				perror("Memory reallocation failed");
 				free(arrayStr);
+				free(token);
 				exit(EXIT_FAILURE);
 			}
 		}

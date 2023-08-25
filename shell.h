@@ -23,6 +23,9 @@ size_t _strlen(const char *str);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 int is_builtin_command(char *command);
-void execute_builtin_command(char *command, char **args, char *env[]);
+void execute_builtin_command(char *command, char **args, char **argv,
+	char *env[]);
+int shell_exit(char *command, char **args, char **argv);
+int isnumber(char *s);
 
 #endif

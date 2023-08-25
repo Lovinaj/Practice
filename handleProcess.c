@@ -42,10 +42,10 @@ void accessCommand(char **arrayStr, char **argv, char *env[])
 {
 	char *command = _strcat("/bin/", arrayStr[0]);
 
-	if (is_builtin_command(arrayStr[0]))
+	if (is_builtin_command(arrayStr[0]) == 1)
 	{
 		free(command);
-		execute_builtin_command(arrayStr[0], arrayStr, env);
+		execute_builtin_command(arrayStr[0], arrayStr, argv, env);
 	}
 	else if (access(arrayStr[0], F_OK) == 0)
 	{

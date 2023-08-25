@@ -42,11 +42,10 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
 void accessCommand(char **arrayStr, char **argv, char *env[])
 {
 	char *command = _strcat("/bin/", arrayStr[0]);
-	/*int executeBuiltin = is_builtin_command;*/
 
-	if (is_builtin_command(arrayStr[0])) 
+	if (is_builtin_command(arrayStr[0]))
 	{
-		execute_builtin_command(arrayStr[0], arrayStr);
+		execute_builtin_command(arrayStr[0], arrayStr, env);
 	} else if (access(arrayStr[0], F_OK) == 0)
 		create_process(arrayStr[0], arrayStr, argv, env);
 	else if (access(command, F_OK) == 0)

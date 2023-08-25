@@ -2,7 +2,9 @@
 
 /**
  * main - Entry point
- * 
+ * @argc: Agument count
+ * @argv: Argument vector
+ * @env: Environment variable from parent
  * Return: Always 0
  */
 

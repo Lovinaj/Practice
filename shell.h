@@ -22,7 +22,7 @@ char *_strcat(char *str1, char *str2);
 size_t _strlen(const char *str);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-int is_builtin_command(const char *command);
-void execute_builtin_command(const char *command, char **args);
+int is_builtin_command(char *command);
+void execute_builtin_command(char *command, char **args, char *env[]);
 
 #endif

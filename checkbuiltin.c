@@ -79,7 +79,7 @@ int shell_exit(char *command, char **args, char **argv)
 	{
 		free(command);
 		free(args);
-		exit(atoi(args[1]));
+		exit(_atoi(args[1]));
 	}
 	else
 	{
@@ -108,7 +108,7 @@ int isnumber(char *s)
 
 	while (s[i] != '\0')
 	{
-		if (isdigit(s[i]) == 0)
+		if (_isdigit(s[i]) == 0)
 			return (1);
 		i++;
 	}

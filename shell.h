@@ -8,6 +8,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <signal.h>
+#include <stdbool.h>
 
 #define MAX_INPUT_LENGTH 1024
 #define BUFFSIZE_STD 128
@@ -29,5 +30,7 @@ int shell_exit(char *command, char **args, char **argv);
 int isnumber(char *s);
 int _isdigit(int c);
 int _atoi(char *s);
+char *_strtok(char *str, const char *delim);
+char *_strchr(const char *s, int c);
 
 #endif

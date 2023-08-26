@@ -20,7 +20,7 @@ char **parse(char *line)
 		perror("Memory allocation for list of tokens");
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(line, DELIM);
+	token = _strtok(line, DELIM);
 	if (token == NULL)
 	{
 		free(token);
@@ -43,7 +43,7 @@ char **parse(char *line)
 			}
 		}
 		arrayStr[i] = token;
-		token = strtok(NULL, " ");
+		token = _strtok(NULL, " ");
 	}
 	arrayStr[i] = NULL;
 	free(token);

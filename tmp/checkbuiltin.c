@@ -68,6 +68,8 @@ void execute_builtin_command(char *command, char **args, char **argv,
 
 int shell_exit(char *command, char **args, char **argv)
 {
+	int status;
+
 	if (args[1] == NULL)
 	{
 		free(command);
@@ -77,9 +79,10 @@ int shell_exit(char *command, char **args, char **argv)
 
 	else if (isnumber(args[1]) == 0)
 	{
+		status = atoi(args[1]);
 		free(command);
 		free(args);
-		exit(_atoi(args[1]));
+		exit(status);
 	}
 	else
 	{
@@ -108,7 +111,7 @@ int isnumber(char *s)
 
 	while (s[i] != '\0')
 	{
-		if (_isdigit(s[i]) == 0)
+		if (isdigit(s[i]) == 0)
 			return (1);
 		i++;
 	}

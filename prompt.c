@@ -12,7 +12,7 @@
 
 int prompt(int argc, char *argv[], char **env)
 {
-	char *line;
+	char *buffer = NULL, *line;
 	char **receivedArgs;
 
 	/* loop through to always display the dollar($) prompt */
@@ -21,7 +21,8 @@ int prompt(int argc, char *argv[], char **env)
 		if (isatty(0) == 1)
 			write(1, "$ ", 3);
 		/* read line using function */
-		line = getLine();
+		line = getLine(buffer);
+
 		receivedArgs = parse(line);
 
 		/* when no argument is parsed, parse returns NULL */
@@ -29,11 +30,8 @@ int prompt(int argc, char *argv[], char **env)
 		{
 			accessCommand(receivedArgs, argv, env);
 		}
+		free(receivedArgs);
+		free(line);
 	}
-
-	/* free malloc'd variables */
-	free(line);
-	free(receivedArgs);
-
 	return (0);
 }

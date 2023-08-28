@@ -8,14 +8,13 @@
 #include <string.h>
 #include <sys/types.h>
 #include <signal.h>
-#include <stdbool.h>
 
 #define MAX_INPUT_LENGTH 1024
 #define BUFFSIZE_STD 128
 #define DELIM " \t\r\a\n"
 
 int prompt(int argc, char **argv, char **env);
-char *getLine(void);
+char *getLine(char *buffer);
 char **parse(char *line);
 void create_process(char *command, char **arrayStr, char **argv, char *env[]);
 void accessCommand(char **arrayStr, char **argv, char *env[]);
@@ -28,9 +27,5 @@ void execute_builtin_command(char *command, char **args, char **argv,
 	char *env[]);
 int shell_exit(char *command, char **args, char **argv);
 int isnumber(char *s);
-int _isdigit(int c);
-int _atoi(char *s);
-char *_strtok(char *str, const char *delim);
-char *_strchr(const char *s, int c);
 
 #endif

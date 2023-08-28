@@ -5,7 +5,7 @@
  *
  * Return: return line red from input stdin
  */
-char *getLine(char *buffer)
+char *getLine(char *buffer, int status)
 {
 	int flag;
 	size_t n;
@@ -15,7 +15,9 @@ char *getLine(char *buffer)
 	if (flag == -1)
 	{
 		free(buffer);
-		exit(EXIT_SUCCESS);
+		if (isatty(0) == 1)
+			exit(0);
+		exit(status);
 	}
 
 	buffer[strlen(buffer) - 1] = '\0';

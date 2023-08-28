@@ -22,6 +22,7 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
 			free(command);
 			free(arrayStr);
 			perror(argv[0]);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
@@ -41,7 +42,7 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
  * Return: None.
 */
 
-void accessCommand(char **arrayStr, char **argv, char *env[])
+int accessCommand(char **arrayStr, char **argv, char *env[])
 {
 /*	char *command = malloc(sizeof(char) * 1024);
 
@@ -69,7 +70,7 @@ void accessCommand(char **arrayStr, char **argv, char *env[])
 		write(2, "1: ", 3);
 		write(2, arrayStr[0], strlen(arrayStr[0]));
 		write(2, ": not found\n", 12);
-		/* kill(getpid(), SIGSYS); */
+		return (127);
 	}
-	/*free(command);*/
+	return (0);
 }

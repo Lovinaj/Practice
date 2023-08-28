@@ -14,10 +14,10 @@
 #define DELIM " \t\r\a\n"
 
 int prompt(int argc, char **argv, char **env);
-char *getLine(char *buffer);
+char *getLine(char *buffer, int status);
 char **parse(char *line);
 void create_process(char *command, char **arrayStr, char **argv, char *env[]);
-void accessCommand(char **arrayStr, char **argv, char *env[]);
+int accessCommand(char **arrayStr, char **argv, char *env[]);
 char *_strcat(char *str1, char *str2);
 size_t _strlen(const char *str);
 char *_strcpy(char *dest, char *src);

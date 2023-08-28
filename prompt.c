@@ -12,6 +12,7 @@
 
 int prompt(int argc, char *argv[], char **env)
 {
+	int status = 0;
 	char *buffer = NULL, *line;
 	char **receivedArgs;
 
@@ -21,14 +22,14 @@ int prompt(int argc, char *argv[], char **env)
 		if (isatty(0) == 1)
 			write(1, "$ ", 3);
 		/* read line using function */
-		line = getLine(buffer);
+		line = getLine(buffer, status);
 
 		receivedArgs = parse(line);
 
 		/* when no argument is parsed, parse returns NULL */
 		if (receivedArgs != NULL)
 		{
-			accessCommand(receivedArgs, argv, env);
+			status = accessCommand(receivedArgs, argv, env);
 		}
 		free(receivedArgs);
 		free(line);

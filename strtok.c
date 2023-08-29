@@ -21,7 +21,6 @@ char *_strtok(char *str, const char *delim)
 		return (NULL);
 	}
 
-	token = malloc(sizeof(char) * 1024);
 	token = str;
 	while (*str != '\0' && _strchr(delim, *str) == NULL)
 	{

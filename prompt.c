@@ -24,7 +24,7 @@ int prompt(int argc, char *argv[], char **env)
 		/* read line using function */
 		line = getLine(buffer, status);
 
-		receivedArgs = parse(line);
+		receivedArgs = parse(line, DELIM);
 
 		/* when no argument is parsed, parse returns NULL */
 		if (receivedArgs != NULL)

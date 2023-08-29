@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * _strcpy - Copies a string from source to destination.
  * @dest: The destination buffer.
@@ -7,10 +9,17 @@
 */
 char *_strcpy(char *dest, char *src)
 {
-	int i;
+	char *ptr = NULL;
 
-	for (i = 0; src[i] != '\0'; i++)
-		dest[i] = src[i];
+	ptr = dest;
+	while (*src)
+	{
+		*ptr = *src;
+		ptr++;
+		src++;
+	}
+
+	*ptr = '\0';
 
 	return (dest);
 }

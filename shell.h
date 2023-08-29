@@ -15,10 +15,10 @@
 
 int prompt(int argc, char **argv, char **env);
 char *getLine(char *buffer, int status);
-char **parse(char *line);
+char **parse(char *line, char *delimiter);
 void create_process(char *command, char **arrayStr, char **argv, char *env[]);
 int accessCommand(char **arrayStr, char **argv, char *env[]);
-char *_strcat(char *str1, char *str2);
+char *_strcat(char *src, char *dest);
 size_t _strlen(const char *str);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
@@ -27,5 +27,7 @@ void execute_builtin_command(char *command, char **args, char **argv,
 	char *env[]);
 int shell_exit(char *command, char **args, char **argv);
 int isnumber(char *s);
+char **env_variable(char **env);
+void *_realloc(void *ptr, size_t new_size);
 
 #endif

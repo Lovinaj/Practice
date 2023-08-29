@@ -7,7 +7,7 @@
  *
  * Return: return a list of all strings passed from the command line
  */
-char **parse(char *line)
+char **parse(char *line, char *delimiter)
 {
 	char *token = NULL;
 	char **arrayStr = NULL;
@@ -20,7 +20,7 @@ char **parse(char *line)
 		perror("Memory allocation for list of tokens");
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(line, DELIM);
+	token = strtok(line, delimiter);
 	if (token == NULL)
 	{
 		free(token);
@@ -33,7 +33,7 @@ char **parse(char *line)
 		{
 			buffsize += BUFFSIZE_STD;
 			/* Reallocate memory for the arrayStr array with the new buffer size */
-			arrayStr = realloc(arrayStr, buffsize * sizeof(char *));
+			arrayStr = _realloc(arrayStr, buffsize * sizeof(char *));
 			if (arrayStr == NULL)
 			{
 				perror("Memory reallocation failed");
@@ -43,7 +43,7 @@ char **parse(char *line)
 			}
 		}
 		arrayStr[i] = token;
-		token = strtok(NULL, " ");
+		token = strtok(NULL, delimiter);
 	}
 	arrayStr[i] = NULL;
 	free(token);

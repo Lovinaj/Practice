@@ -20,6 +20,6 @@ char *getLine(char *buffer, int status)
 		exit(status);
 	}
 
-	buffer[strlen(buffer) - 1] = '\0';
+	buffer[_strlen(buffer) - 1] = '\0';
 	return (buffer);
 }

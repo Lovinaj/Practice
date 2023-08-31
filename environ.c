@@ -10,20 +10,18 @@
  *	   return NULL if PATH variable is empty or not found
 */
 
-char **env_variable(char **env)
+char *get_path(char **env)
 {
-	int i;
-	char **path = NULL;
+	char *path, *path_dup;
 
 	if (env == NULL)
 		return (NULL);
 
-	for (i = 0; env[i] != NULL; i++)
-	{
-		path = parse(env[i], "=");
-		if (_strcmp(path[0], "PATH") == 0)
-			return (path);
-		free(path);
-	}
-	return (NULL);
+	path = getenv("PATH");
+	if (path == NULL)
+		return (NULL);
+
+	path_dup = _strdup(path);
+
+	return (path_dup);
 }

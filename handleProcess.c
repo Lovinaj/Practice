@@ -44,10 +44,8 @@ void create_process(char *command, char **arrayStr, char **argv, char *env[])
 
 int accessCommand(char **arrayStr, char **argv, char *env[])
 {
-	char *command = malloc(sizeof(char) * 1024);
+	int p;
 
-	_strcpy(command, "/bin/");
-	_strcat(command, arrayStr[0]);
 
 /*	if (is_builtin_command(arrayStr[0]))
 	{
@@ -57,23 +55,56 @@ int accessCommand(char **arrayStr, char **argv, char *env[])
 */
 	if (access(arrayStr[0], F_OK) == 0)
 	{
-		free(command);
 		create_process(arrayStr[0], arrayStr, argv, env);
+		return (0);
 	}
-	else if (access(command, F_OK) == 0)
+
+	p = handle_path(arrayStr, argv, env);
+
+	return (p);
+}
+
+int handle_path(char **arrayStr, char **argv, char **env)
+{
+	char *command;
+	char *shell_path, *path;
+
+	path = get_path(env);
+	if (path == NULL)
 	{
-		create_process(command, arrayStr, argv, env);
-		free(command);
-	}
-	else
-	{
-		write(2, argv[0], _strlen(argv[0]));
-		write(2, ": ", 2);
-		write(2, "1: ", 3);
-		write(2, arrayStr[0], _strlen(arrayStr[0]));
-		write(2, ": not found\n", 12);
-		free(command);
+		command_not_found(arrayStr, argv);
+		free(path);
 		return (127);
 	}
-	return (0);
+
+	shell_path = _strtok(path, ":");
+	if (shell_path != NULL)
+	{
+		while (shell_path != NULL)
+		{
+			command = malloc(strlen(shell_path) +
+				strlen(arrayStr[0]) + 2);
+			if (!command)
+			{
+				write(2, "Unable to allocate memory\n", 26);
+				exit(EXIT_FAILURE);
+			}
+			_strcpy(command, shell_path);
+			/* shell_path does not end with '/' */
+			_strcat(command, "/");
+			_strcat(command, arrayStr[0]);
+			if (access(command, F_OK) == 0)
+			{
+				free(path);
+				create_process(command, arrayStr, argv, env);
+				free(command);
+				return (0);
+			}
+			shell_path = _strtok(NULL, ":");
+			free(command);
+		}
+	}
+	command_not_found(arrayStr, argv);
+	free(path);
+	return (127);
 }
